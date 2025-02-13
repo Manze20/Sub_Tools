@@ -15,6 +15,10 @@ class Serial:
             self.type = "RS232"
             print("RS232 selected")
         self.connected = False
+
+    def ClearBuffer(self):
+        self.buffer = ""
+
     def message_set(self, sign_start, sign_stop):
         self.sign_start = str(sign_start)
         self.sign_stop  = str(sign_stop)
@@ -33,6 +37,7 @@ class Serial:
                 port = self.port_RS,
                 baudrate = self.baudrate,
                 timeout=0,)
+            print(f"Connect to {self.ser.port} with {self.ser.baudrate}")
             return True
         else:
             self.sock = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
